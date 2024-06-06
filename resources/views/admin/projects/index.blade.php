@@ -6,14 +6,14 @@
     <h1>LISTA PROGETTI APERTI</h1>
     <table class="table table-bordered border-primary align-middle">
         <thead>
-            <th>ID</th>
-            <th>Project Name</th>
-            <th>Slug</th>
-            <th>Type</th>
-            <th>Technologies</th>
-            <th>Client Name</th>
-            <th>Summary</th>
-            <th>Actions</th>
+            <th class="text-center">ID</th>
+            <th class="text-center">Project Name</th>
+            <th class="text-center">Slug</th>
+            <th class="text-center">Type</th>
+            <th class="text-center">Technologies</th>
+            <th class="text-center">Client Name</th>
+            <th class="text-center">Summary</th>
+            <th class="text-center">Actions</th>
         </thead>
         <tbody>
             @foreach ($projects as $project)
