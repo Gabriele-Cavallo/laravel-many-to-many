@@ -30,5 +30,8 @@
                 <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Projects
             </a>
         </button>
+        <button class="btn btn-dark mt-4">
+            <a href="{{ route('admin.projects.edit', $project->slug) }}">Edit Project</a>
+        </button>
     </div>
 @endsection

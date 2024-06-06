@@ -53,6 +53,24 @@
     </div>
     {{-- Image input --}}
 
+    {{-- Technologies check input --}}
+    <h4 class="my-3">Technolgies</h4>
+    <div class="check-wrapper d-flex">
+        @foreach ($technologies as $technology)
+            <div class="form-check">
+                @if ($errors->any())
+                    <input @checked(in_array($technology->id, old('technologies', []))) class="form-check-input" type="checkbox" name="technologies[]" value="{{ $technology->id }}" id="tech-{{ $technology->id }}">
+                @else
+                    <input @checked($project->technologies->contains($technology)) class="form-check-input" type="checkbox" name="technologies[]" value="{{ $technology->id }}" id="tech-{{ $technology->id }}">
+                @endif
+                <label class="form-check-label" for="flexCheckDefault">
+                    {{ $technology->name }}
+                </label>
+            </div>
+        @endforeach
+    </div>
+    {{-- Technologies check input --}}
+
     {{-- Client name input --}}
     <div class="mb-3">
       <label for="client_name" name="client_name" class="form-label">Client name</label>

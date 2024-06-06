@@ -52,7 +52,8 @@ class ProjectController extends Controller
                 'client_name' => 'required|min:1|max:100',
                 'summary' => 'nullable|min:10',
                 'cover_image' => 'nullable|image|max:512',
-                'type_id' => 'nullable|exists:types,id'
+                'type_id' => 'nullable|exists:types,id',
+                'technologies' => 'nullable|exists:technologies,id'
             ],
             [
                 'name.required' => 'Il nome del progetto è obbligatorio',
@@ -83,7 +84,7 @@ class ProjectController extends Controller
         if($request->has('technologies')) {
             $newProject->technologies()->attach($form['technologies']);
         }
-        
+
         // session()->flash('message', $newProject->name . 'successfully created.');
         return redirect()->route('admin.projects.show', $newProject->slug)->with('message', $newProject->name . ' successfully created.');
     }
@@ -108,7 +109,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -131,7 +134,8 @@ class ProjectController extends Controller
                 'client_name' => 'required|min:1|max:100',
                 'summary' => 'nullable|min:10',
                 'cover_image' => 'nullable|image|max:512',
-                'type_id' => 'nullable|exists:types,id'
+                'type_id' => 'nullable|exists:types,id',
+                'technologies' => 'nullable|exists:technologies,id'
             ],
             [
                 'name.required' => 'Il nome del progetto è obbligatorio',
@@ -157,6 +161,12 @@ class ProjectController extends Controller
         }
         $project->slug = Str::slug($form['name'], '-');
         $project->update($form);
+
+        if($request->has('technologies')) {
+            $project->technologies()->sync($form['technologies']);
+        } else {
+            $project->technologies()->detach();
+        }
 
         return redirect()->route('admin.projects.show', $project->slug);
     }

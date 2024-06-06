@@ -29,7 +29,7 @@
                                     {{ $technology->name }}@if (!$loop->last),@endif
                                 @endforeach
                             @else
-                                <span>No technologies selected</span>
+                                <span class="no-wrap">No technologies selected</span>
                             @endif
                         </div>
                     </td>
