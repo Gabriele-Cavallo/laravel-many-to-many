@@ -10,6 +10,7 @@
             <th>Project Name</th>
             <th>Slug</th>
             <th>Type</th>
+            <th>Technologies</th>
             <th>Client Name</th>
             <th>Summary</th>
             <th>Actions</th>
@@ -21,6 +22,17 @@
                     <td>{{ $project->name }}</td>
                     <td>{{ $project->slug }}</td>
                     <td class="no-wrap">{{ $project->type ? $project->type->name : 'No type' }}</td>
+                    <td>
+                        <div class="my-2"> 
+                            @if (count($project->technologies) > 0)
+                                @foreach ($project->technologies as $technology)
+                                    {{ $technology->name }}@if (!$loop->last),@endif
+                                @endforeach
+                            @else
+                                <span>No technologies selected</span>
+                            @endif
+                        </div>
+                    </td>
                     <td>{{ $project->client_name }}</td>
                     <td>{{ $project->summary }}</td>
                     <td class="text-center">

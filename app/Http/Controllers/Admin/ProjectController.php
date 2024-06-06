@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +34,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -78,8 +80,11 @@ class ProjectController extends Controller
         // $newProject->slug = Str::slug($newProject->name, '-');
         $newProject->save();
 
-        // session()->flash('message', $newProject->name . 'successfully created.');
+        if($request->has('technologies')) {
+            $newProject->technologies()->attach($form['technologies']);
+        }
         
+        // session()->flash('message', $newProject->name . 'successfully created.');
         return redirect()->route('admin.projects.show', $newProject->slug)->with('message', $newProject->name . ' successfully created.');
     }
 

@@ -12,6 +12,15 @@
         <div class="my-2"><strong>ID</strong>: {{ $project->id }}</div>
         <div class="my-2"><strong>Slug</strong>: {{ $project->slug }}</div>
         <div class="my-2"><strong>Type</strong>: {{ $project->type ? $project->type->name : 'No type' }}</div>
+        <div class="my-2"><strong>Technologies</strong>: 
+            @if (count($project->technologies) > 0)
+                @foreach ($project->technologies as $technology)
+                    {{ $technology->name }}@if (!$loop->last),@endif
+                @endforeach
+            @else
+                <span>No technologies selected</span>
+            @endif
+        </div>
         <div class="my-2"><strong>Client name</strong>: {{ $project->client_name }}</div>
         <div class="my-2"><strong>Created at</strong>: {{ $project->created_at }}</div>
         <div class="my-2"><strong>Updated at</strong>: {{ $project->updated_at }}</div>

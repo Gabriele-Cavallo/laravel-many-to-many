@@ -35,9 +35,6 @@
             @endforeach
             </select>
         </div>
-        @error('name')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
         {{-- /Project type select --}}
 
         {{-- Image input --}}
@@ -46,6 +43,20 @@
             <input class="form-control" type="file" id="cover_image" name="cover_image">
         </div>
         {{-- Image input --}}
+
+        {{-- Technologies check input --}}
+        <h4 class="my-3">Technolgies</h4>
+        <div class="check-wrapper d-flex">
+            @foreach ($technologies as $technology)
+                <div class="form-check">
+                    <input @checked(in_array($technology->id, old('technologies', []))) class="form-check-input" type="checkbox" name="technologies[]" value="{{ $technology->id }}" id="tech-{{ $technology->id }}">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        {{ $technology->name }}
+                    </label>
+                </div>
+            @endforeach
+        </div>
+        {{-- Technologies check input --}}
 
         {{-- Client name input --}}
         <div class="mb-3">
