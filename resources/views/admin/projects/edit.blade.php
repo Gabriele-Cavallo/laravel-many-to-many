@@ -63,7 +63,7 @@
                 @else
                     <input @checked($project->technologies->contains($technology)) class="form-check-input" type="checkbox" name="technologies[]" value="{{ $technology->id }}" id="tech-{{ $technology->id }}">
                 @endif
-                <label class="form-check-label" for="flexCheckDefault">
+                <label class="form-check-label" for="tech-{{ $technology->id }}">
                     {{ $technology->name }}
                 </label>
             </div>

@@ -53,7 +53,7 @@ class ProjectController extends Controller
                 'summary' => 'nullable|min:10',
                 'cover_image' => 'nullable|image|max:512',
                 'type_id' => 'nullable|exists:types,id',
-                'technologies' => 'nullable|exists:technologies,id'
+                'technologies' => 'exists:technologies,id'
             ],
             [
                 'name.required' => 'Il nome del progetto è obbligatorio',
@@ -135,7 +135,7 @@ class ProjectController extends Controller
                 'summary' => 'nullable|min:10',
                 'cover_image' => 'nullable|image|max:512',
                 'type_id' => 'nullable|exists:types,id',
-                'technologies' => 'nullable|exists:technologies,id'
+                'technologies' => 'exists:technologies,id'
             ],
             [
                 'name.required' => 'Il nome del progetto è obbligatorio',
